@@ -1,0 +1,125 @@
+:root {
+  /* Color Variables */
+  --color-light-1: 246 246 246;
+  --color-light-2: 234 234 234;
+  --color-light-3: 240 240 240;
+  --color-green-1: 184 194 135;
+  --color-green-2: 91 101 42;
+  --color-green-3: 157 171 90;
+  --color-green-4: 226 230 212;
+  --color-green-5: 240 242 229;
+  --color-green-6: 91 101 42;
+  --color-green-7: 244 246 237;
+  --color-green-8: 230, 235, 206;
+  --color-green-9: 195, 202, 164;
+  --color-green-10: 218, 224, 192;
+  --color-gray-1: 223, 223, 223;
+  --color-gray-2: 177, 177, 177;
+  --color-main-text: 17, 17, 17;
+
+  --radius-1: 0.75rem;
+  --radius-2: 0.625rem;
+
+  /* Original spacing variables */
+  --s2: 0.125rem;
+  --s4: 0.25rem;
+  --s6: 0.375rem;
+  --s8: 0.5rem;
+  --s10: 0.625rem;
+  --s12: 0.75rem;
+  --s14: 0.875rem;
+  --s16: 1rem;
+  --s18: 1.125rem;
+  --s20: 1.25rem;
+  --s24: 1.5rem;
+  --s28: 1.75rem;
+  --s32: 2rem;
+  --s40: 2.5rem;
+  --s46: 2.87rem;
+  --s60: 3.75rem;
+  --s68: 4.25rem;
+  --s80: 5rem;
+  --s90: 5.625rem;
+  --s96: 6rem;
+  --s100: 6.25rem;
+  --s120: 7.5rem;
+  --s128: 8rem;
+  --s146: 9.125rem;
+  --s164: 10.25rem;
+  --s200: 12.5rem;
+
+  /* New Sesame-inspired variables */
+  /* Typography Variables */
+  --t-base-size: 16px;
+  --t-scale-ratio: 1.25;
+  --t-scale-1: 1rem;
+  --t-scale-2: calc(var(--t-scale-1) * var(--t-scale-ratio));
+  --t-scale-3: calc(var(--t-scale-2) * var(--t-scale-ratio));
+  --t-scale-4: calc(var(--t-scale-3) * var(--t-scale-ratio));
+  --t-scale-5: calc(var(--t-scale-4) * var(--t-scale-ratio));
+  --t-scale-6: calc(var(--t-scale-5) * var(--t-scale-ratio));
+
+  /* Grid Variables */
+  --grid-columns: 12;
+  --grid-gap: var(--s24);
+
+  /* Transition Variables */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.6s ease;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* Custom utility classes that match Sesame styling */
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.md\:grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.gap-\[var\(--s20\)\] {
+  gap: var(--s20);
+}
+
+.pt-\[var\(--s80\)\] {
+  padding-top: var(--s80);
+}
+
+.md\:pt-\[var\(--s200\)\] {
+  padding-top: var(--s200);
+}
+
+.px-\[var\(--s28\)\] {
+  padding-left: var(--s28);
+  padding-right: var(--s28);
+}
+
+.sm\:px-\[var\(--s32\)\] {
+  padding-left: var(--s32);
+  padding-right: var(--s32);
+}
+
+.md\:px-\[var\(--s40\)\] {
+  padding-left: var(--s40);
+  padding-right: var(--s40);
+}
+
+.min-h-\[100dvh\] {
+  min-height: 100dvh;
+}
+
+.max-w-screen-2xl {
+  max-width: 1536px;
+}
+
+body {
+  background: rgb(var(--color-light-1));
+  color: rgb(var(--color-main-text));
+}

@@ -1,17 +1,12 @@
 import React from "react";
 import { NextPage } from "next";
 import Head from "next/head";
-import Layout from "@/components/layout/Layout";
-import HeroSection from "@/components/home/HeroSection";
-import GoalsSection from "@/components/home/GoalsSection";
-import JoinUsBanner from "@/components/home/JoinUsBanner";
-import CareersBanner from "@/components/home/CareersBanner";
-import {
-  getHomeMetadata,
-  getOrganizationJsonLd,
-  getWebsiteJsonLd,
-  getHomeBreadcrumbJsonLd,
-} from "@/scripts/seo";
+import Script from "next/script";
+import HeroSection from "../components/home/HeroSection";
+import GoalsSection from "../components/home/GoalsSection";
+import JoinUsBanner from "../components/home/JoinUsBanner";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 /**
  * Landing Page
@@ -20,31 +15,25 @@ import {
  * 1. Hero
  * 2. Goals
  * 3. Join-Us banner
- * 4. Careers banner
- * 5. Footer (included in Layout)
+ * 4. Footer (included in Layout)
  */
 
 const Home: NextPage = () => {
-  // SEO metadata
-  const metadata = getHomeMetadata();
-
-  // JSON-LD structured data
-  const organizationJsonLd = getOrganizationJsonLd();
-  const websiteJsonLd = getWebsiteJsonLd();
-  const breadcrumbJsonLd = getHomeBreadcrumbJsonLd();
-
   return (
-    <Layout>
+    <>
       <Head>
-        <title>{metadata.title as string}</title>
-        <meta name="description" content={metadata.description as string} />
+        <title>Sesame – Bringing the computer to life</title>
+        <meta
+          name="description"
+          content="We believe in a future where computers are lifelike. They will see, hear, and collaborate with us the way we're used to."
+        />
         <meta
           property="og:title"
-          content={metadata.openGraph?.title as string}
+          content="Sesame – Bringing the computer to life"
         />
         <meta
           property="og:description"
-          content={metadata.openGraph?.description as string}
+          content="We believe in a future where computers are lifelike. They will see, hear, and collaborate with us the way we're used to."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sesame.com" />
@@ -52,34 +41,54 @@ const Home: NextPage = () => {
           property="og:image"
           content="https://www.sesame.com/images/og-home.jpg"
         />
-        <meta property="og:site_name" content="Sesame AI" />
+        <meta property="og:site_name" content="Sesame" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@sesameai" />
+        <meta name="twitter:site" content="@sesame" />
         <link rel="canonical" href="https://www.sesame.com" />
-
-        {/* JSON-LD structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
       </Head>
 
-      {/* Page content */}
-      <HeroSection />
-      <GoalsSection />
-      <JoinUsBanner />
-      <CareersBanner />
-    </Layout>
+      {/* JSON-LD structured data */}
+      <Script
+        id="json-ld-organization"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Sesame",
+            url: "https://www.sesame.com",
+            logo: "https://www.sesame.com/images/logo.png",
+            sameAs: [
+              "https://twitter.com/sesame",
+              "https://linkedin.com/company/sesame",
+            ],
+          }),
+        }}
+      />
+
+      <Script
+        id="json-ld-website"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Sesame",
+            url: "https://www.sesame.com",
+          }),
+        }}
+      />
+
+      <Header />
+
+      <main>
+        <HeroSection />
+        <GoalsSection />
+        <JoinUsBanner />
+      </main>
+
+      <Footer />
+    </>
   );
 };
 

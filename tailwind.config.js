@@ -8,43 +8,46 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        black: "#0B0B0C",
+        black: "#0A0A0A",
         white: "#FFFFFF",
-        orange: "#FF7A00",
-        gray: "#A0A0A0",
+        accent: "#0066FF",
+        neutral: {
+          100: "#F5F5F5",
+          200: "#EEEEEE",
+          300: "#E0E0E0",
+        },
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        mono: ["Menlo", "Monaco", "Consolas", "monospace"],
       },
       fontSize: {
-        "display-xl": ["4rem", { lineHeight: "1.2", fontWeight: "700" }],
-        "heading-m": ["2.25rem", { lineHeight: "1.3", fontWeight: "600" }],
-        "body-m": ["1rem", { lineHeight: "1.5", fontWeight: "400" }],
+        "display-1": [
+          "4.5rem",
+          { lineHeight: "1.05", fontWeight: "600", letterSpacing: "-0.02em" },
+        ],
+        "heading-2": ["2.5rem", { lineHeight: "1.2", fontWeight: "600" }],
+        "body-lg": ["1.25rem", { lineHeight: "1.5", fontWeight: "400" }],
       },
       spacing: {
-        8: "8px",
-        16: "16px",
-        24: "24px",
-        32: "32px",
-        48: "48px",
-        64: "64px",
-        72: "72px",
+        space: "0.5rem",
       },
       borderRadius: {
-        sm: "4px",
-        md: "8px",
+        DEFAULT: "8px",
+        "2xl": "16px",
+        "3xl": "24px",
       },
-      boxShadow: {
-        default: "0 8px 16px rgba(0,0,0,.15)",
+      animation: {
+        "fade-in-up": "fadeInUp 0.6s ease-out forwards",
       },
-      gridTemplateColumns: {
-        12: "repeat(12, minmax(0, 1fr))",
+      keyframes: {
+        fadeInUp: {
+          "0%": { opacity: 0, transform: "translateY(40px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
       },
-      maxWidth: {
-        container: "1200px",
-      },
-      height: {
-        hero: "90vh",
+      screens: {
+        xs: "480px",
       },
     },
   },

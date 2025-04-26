@@ -1,166 +1,151 @@
-Product Requirements Document — Sesame AI Marketing Surface
-
-Scope: / (Landing) and /team only – rebuild pixel-perfect and interaction-perfect.
-
-⸻
-
-0. Document Control
-   • Version: 1.2
-   • Author: ChatGPT — Digital Product Analyst & UX Architect
-   • Date: 26 Apr 2025
+Below is a practical, step-by-step playbook for turning any blank project into a pixel-perfect, interaction-perfect clone of the Sesame landing page ( https://www.sesame.com ).
+It assumes a modern React / Next 14 + Tailwind stack, but you can map the same structure to plain HTML/CSS or another framework just by keeping the section order and CSS rules identical.
 
 ⸻
 
-1. Purpose & Scope
+1 · Frame the project 1. Scaffold
 
-Re-implement the two public pages of Sesame.com in an independent Next.js 14 code-base so they can be served without functional or visual regression.
+npx create-next-app@latest sesame-clone --typescript --tailwind
+cd sesame-clone
 
-⸻
+    2.	Global styles
 
-2. Goals & Success Metrics
+Import fonts once in globals.css (or \_app.tsx):
 
-Performance
-• FCP ≤ 1.2 s • LCP ≤ 2 s • CLS < 0.10
-
-Engagement
-• Header-nav CTR > 4 % of pageviews
-• “See open roles” CTA ≥ 10 % of Team-page sessions
-• Gallery-swipe average ≥ 2 interactions per Team-page session
-
-Accessibility
-• Full WCAG 2.2 AA pass
-• 100 % compliance with prefers-reduced-motion
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+:root{
+--clr-text:#0A0A0A;
+--clr-accent:#0066FF; /_ link + button _/
+--space:0.5rem; /_ 8 px rhythm _/
+}
+html{scroll-behavior:smooth;}
+body{font-family:Inter,system-ui,sans-serif;color:var(--clr-text);}
 
 ⸻
 
-3. Target Audiences & Top Jobs-to-Be-Done
-   1. Prospective hires → Home → Team → Ashby Jobs
-   2. Investors / press → Rapid scroll-scan vision & leadership sections
-   3. AI / ML community → Click through to research PDF from Home
+2 · Lay the page skeleton
+
+<Header /><!-- sticky -->
+<main>
+  <Hero />
+  <SectionGoals />   <!-- 01 & 02 -->
+  <SectionJoin />    <!-- Join Sesame -->
+</main>
+<Footer />
+
+2.1 Header (sticky)
+• Structure: flex row, 100 vw, position:sticky; top:0; z-index:50;
+• Left group: Sesame · Research · Team (plain <Link>s)
+• Right CTA: “Demo” button – solid accent, 8 px radius, hover :opacity-90
+• Active state: underline 2 px accent on the current route.
+• Small-screen: collapse to hamburger (slide-in menu) after md.
+
+2.2 Hero
+
+Element Token / class suggestion
+H1 text-5xl md:text-7xl leading-[1.05]“Bringing the computer to life”
+Copy paragraph prose md:prose-lg mt-4 max-w-[60ch]
+Layout centered column, py-24 md:py-40
+Entry animation Fade/slide up 40 px over 600 ms on first viewport
+
+2.3 “Goals” (two numbered feature blocks)
+
+Number Heading (H2) Body copy (≈ 2 sentences) CTA
+01 A personal companion … “Try our research” → /demo
+02 Lightweight eyewear … (no CTA)
+
+Implementation tips ￼
+• Use a 12-col grid: on lg: put number/heading left, copy right; stack at sm:.
+• Prefix numbers with font-mono text-3xl text-accent.
+
+2.4 Join Sesame section
+• H2 “Join Sesame” followed by one sentence and link “team and mission”.
+• Below: 4-image gallery (Team hero photos). Use grid-cols-2 md:grid-cols-4 gap-4, each image rounded-2xl object-cover aspect-[3/4].
+• Secondary CTA beneath images → Ashby jobs URL.
+
+2.5 Footer
+
+<small>Home · Research · Team · Contact us</small>
+<small>© 2025 Sesame AI Inc.</small>
+<small>Privacy · Terms</small>
+
+Flex column on mobile, row on md:; give top border border-t-neutral-200.
 
 ⸻
 
-4. Information Architecture
+3 · Design system cheatsheet
+• Color
+• Text #0A0A0A
+• Accent links / buttons #0066FF
+• Section backgrounds all white; rely on generous white space.
+• Type scale
 
-Global
-• Sticky Header — “Sesame / Research / Team / Demo”
+Token Size
+display-1 64 / 72 px
+heading-2 40 / 48 px
+body-lg 20 px
 
-Landing (/) 1. Hero — H1 “Bringing the computer to life” + tagline paragraph 2. Goals section — 01 Personal Companion, 02 Lightweight Eyewear 3. Join-Us banner — copy + two prototype images, inline Team link 4. Careers banner — small blurb + CTA 5. Footer
-
-Team (/team) 1. Hero — H1 “Team” 2. Leadership blurb (Iribe / Kumar / Brown) 3. Offices + values paragraph 4. Open-roles CTA → new-tab Ashby 5. Roster carousel — 4 staff photos, horizontal scroll-snap 6. Product carousel — 4 prototype images, horizontal scroll-snap 7. Product overview copy 8. Research overview copy + external PDF link 9. Final CTA block — Email us / See open roles 10. Footer
-
-⸻
-
-5. Key User Flows
-   • Explore & Apply Home → Team → Open-roles (Ashby)
-   • Research Deep-dive Home → inline PDF link → external page
-   • Mobile Navigation Hamburger → slide-in menu → page select
-   • Motion-Reduction Animations disabled when prefers-reduced-motion
+    •	Spacing – 8-point grid (var(--space)) but double it between big sections (py-24 md:py-40).
+    •	Motion – only subtle fades / translateY for section reveal; respect prefers-reduced-motion.
 
 ⸻
 
-6. Content & Copy Requirements
-   • All H1s, headings, numbered goal titles, bios, and CTA labels must match live site verbatim.
-   • Alt-text (exact strings in Content Inventory JSON) required for every foreground image and carousel frame.
-   • Footer copy: © 2025 Sesame AI Inc. All rights reserved. + Privacy / Terms links.
+4 · Code snippets you can drop in
+
+4.1 Header component (Next + Tailwind)
+
+// components/Header.tsx
+import Link from "next/link";
+export default function Header() {
+const nav = [
+{href:"/", label:"Sesame"},
+{href:"/research", label:"Research"},
+{href:"/team", label:"Team"}
+];
+return (
+<header className="sticky top-0 backdrop-blur bg-white/80 border-b border-neutral-100">
+<div className="mx-auto flex items-center justify-between max-w-7xl px-4 py-3">
+<nav className="flex gap-6">
+{nav.map(n=>(
+<Link key={n.href} href={n.href}
+              className="font-medium hover:text-accent transition-colors">{n.label}</Link>
+))}
+</nav>
+<Link href="/demo"
+          className="rounded-md bg-accent px-4 py-2 text-white font-semibold shadow hover:opacity-90">
+Demo
+</Link>
+</div>
+</header>
+);
+}
+
+4.2 Hero (with Framer Motion)
+
+"use client";
+import {motion} from "framer-motion";
+export default function Hero() {
+return (
+<section className="text-center">
+<motion.h1 initial={{opacity:0,y:40}} animate={{opacity:1,y:0}}
+transition={{duration:0.6}} className="mx-auto max-w-4xl text-5xl md:text-7xl font-semibold">
+Bringing the computer to life
+</motion.h1>
+<p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl leading-relaxed">
+We believe in a future where computers are lifelike&hellip;{/_ rest of copy _/}
+</p>
+</section>
+);
+}
+
+(Repeat the pattern for the Goals & Join sections.)
 
 ⸻
 
-7. Functional Requirements
-   • F-1 Sticky header — appears after 24 px scroll (desktop) / 12 px (mobile); backdrop-filter:blur(8px); logo scales 1 → 0.9.
-   • F-2 Navigation links — hover underline 2 px #FF7A00 in 180 ms; active-route class; 3 px focus outline.
-   • F-3 Scroll-reveal — IntersectionObserver (rootMargin:-25%) animates .reveal-up (translateY 20 → 0, opacity 0 → 1, 400 ms; 60 ms stagger).
-   • F-4 Carousel component (roster & product) — CSS scroll-snap x mandatory; arrow buttons; dot indicators; full keyboard & screen-reader support (aria-roledescription="carousel").
-   • F-5 Lazy media — Non-critical images loading="lazy"; hero pre-loaded with fetchpriority="high"; AVIF / WebP with JPG/PNG fallback.
-   • F-6 Open-roles CTA — opens Ashby in new tab, rel="noopener"; GTM event cta_open_roles.
-   • F-7 Hamburger drawer — icon morph; slide-in panel; focus-trap; closes on Esc or route-change.
-   • F-8 Reduced-motion — media-query disables transitions & sets scroll-behavior:auto.
-   • F-9 SEO & Schema — inject WebSite, Organization, BreadcrumbList JSON-LD; unique <title> & meta description; Open-Graph image /og-image.jpg.
-   • F-10 404 — custom static 404 with “Back home” button; redirect legacy /about → /team.
+5 · Polish & QA checklist 1. Responsive breakpoints: sm ≤ 640 px, md 768 px, lg 1024 px+. 2. Accessibility: semantic headings (h1-h2-h3), alt text on every image, focus outline on links, color-contrast ratio ≥ 4.5. 3. Performance: serve images via <Image> with placeholder="blur"; target FCP ≤ 1.2 s, LCP ≤ 2 s. 4. SEO: <title>Sesame – Bringing the computer to life</title>, OpenGraph tags, canonical URL. 5. Deploy: vercel --prod (or Netlify). Confirm no visual diffs against the reference site at 1440 px, 768 px, and 390 px widths.
 
 ⸻
 
-8. Design System & UI Specs
+Want the quickest sanity check? 1. Run npx @next/bundle-analyzer — make sure JS ≤ 150 kB. 2. Compare screenshots side-by-side in Chrome DevTools’ “Rendering → Layout Shift Regions” to confirm CLS ≈ 0.
 
-Colors
-• bg-primary #0B0B0C
-• text-primary #FFFFFF
-• accent #FF7A00
-• text-secondary #A0A0A0
-
-Typography — Inter via Google Fonts
-• Display-XL 4 rem / 700 — hero desktop
-• Heading-M 2.25 rem / 600 — section H2
-• Body-M 1 rem / 400 — paragraphs
-
-Spacing — 8-pt scale (4 / 8 / 16 / 24 / 40 / 64 px)
-Border radius — 4 px buttons, 8 px cards/images
-Shadow — hover 0 8 16 rgba(0,0,0,.15)
-Grid — 12 columns, 1200 px max-width, 72 px gutters
-
-Key components
-• Hero — full-bleed, min-height 90 vh, dark gradient overlay
-• Goal card — badge numeral 72 px; hover translateY -4 px + shadow
-• Roster tile — square avatar 240 px; name bold 16 px; role 14 px
-
-⸻
-
-9. Responsive Behaviour
-   • ≥ 1280 px — goals 3-col; carousels 3-col
-   • 1024–1279 px — roster 4-col; header link gap reduced
-   • 768–1023 px — header 56 px; goals 2-col; carousels 2-col masonry
-   • 481–767 px — hamburger nav; goals 1-col; carousels scroll-snap
-   • ≤ 480 px — hero min-height 70 vh; H1 32 px; roster 1-col
-
-Interactive targets ≥ 32 px; fluid type via clamp().
-
-⸻
-
-10. Accessibility & Performance
-    • Semantic landmarks <header><main><footer>; visible focus states; contrast ≥ 4.5:1.
-    • Carousels keyboard-navigable (←/→, Tab, Space).
-    • Budgets — Total JS ≤ 150 kB gzip; largest LCP asset ≤ 120 kB.
-
-⸻
-
-11. Technical Stack Inference
-
-Next.js 14 (App Router, output:'export') + TypeScript 5.x + Tailwind CSS 3 (JIT) + MDX.
-Hosted on Vercel with Cloudflare CDN.
-Third-party: Google Fonts (Inter), Google Tag Manager, Ashby Jobs.
-
-⸻
-
-12. Analytics Events
-    • nav_click {label,page}
-    • cta_join {location:'home'}
-    • cta_open_roles {page:'team'}
-    • gallery_swipe {carousel:'roster'|'product',direction}
-    • outbound_research {url}
-    • scroll_depth {percent:25|50|75|100}
-
-⸻
-
-13. Risks & Open Questions
-    • Hero images heavy → compress to WebP/AVIF.
-    • Ashby uptime dependency → monitor 5xx.
-    • Research-PDF hosting permanence.
-    • LinkedIn URL structure may change.
-    • Footer year rollover automation.
-
-⸻
-
-14. MVP Dev Checklist
-    1.  Init repo (Next.js + TypeScript).
-    2.  Global layout & theme tokens.
-    3.  Build Landing components & scroll-reveal.
-    4.  Build Team components & carousels.
-    5.  Implement sticky header + mobile nav.
-    6.  Axe automated a11y audit & manual keyboard test.
-    7.  Vitest unit tests & Cypress E2E (desktop + mobile).
-    8.  Vercel preview deploy & Lighthouse CI gate.
-
-⸻
-
-15. Appendix
-    • Figma redlines, token JSON, and image assets supplied separately.
+Follow these steps and you’ll have a landing page that matches Sesame.com down to spacing, type scale, and subtle motion—ready to slot into any codebase or CMS.

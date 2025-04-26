@@ -1,22 +1,17 @@
-import { ReactNode } from "react";
-import Head from "next/head";
+import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { GTMNoScript } from "@/scripts/analytics";
 
 type LayoutProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-const Layout = ({ children }: LayoutProps) => {
+export default function Layout({ children }: LayoutProps) {
   return (
-    <>
-      <div dangerouslySetInnerHTML={{ __html: GTMNoScript }} />
+    <div className="min-h-screen bg-white flex flex-col">
       <Header />
-      <main className="pt-20">{children}</main>
+      <main className="flex-grow">{children}</main>
       <Footer />
-    </>
+    </div>
   );
-};
-
-export default Layout;
+}
