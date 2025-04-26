@@ -18,6 +18,25 @@ interface SwiperGalleryProps {
 
 // The client-side only Swiper gallery
 const SwiperGallery: React.FC<SwiperGalleryProps> = ({ images }) => {
+  // Prepare slides array
+  const slides = images.map((src, i) => (
+    // Using array index in a component that doesn't change order is acceptable
+    // eslint-disable-next-line react/no-array-index-key
+    <div
+      key={i}
+      className="aspect-square relative rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105"
+    >
+      <Image
+        src={src}
+        alt={`Team member ${i + 1}`}
+        fill
+        sizes="(min-width:1024px) 25vw, 50vw"
+        className="object-cover"
+        loading="lazy"
+      />
+    </div>
+  ));
+
   return (
     <div className="mb-12">
       <Swiper
@@ -38,22 +57,10 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ images }) => {
         }}
         className="team-gallery-swiper"
       >
-        {images.map((src, i) => {
-          return (
-            <SwiperSlide key={`slide-${i}`}>
-              <div className="aspect-square relative rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105">
-                <Image
-                  src={src}
-                  alt={`Team member ${i + 1}`}
-                  fill
-                  sizes="(min-width:1024px) 25vw, 50vw"
-                  className="object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </SwiperSlide>
-          );
-        })}
+        {/* Creating slides without keys on SwiperSlide to avoid typing issues */}
+        {images.map((_, index) => (
+          <SwiperSlide>{slides[index]}</SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
