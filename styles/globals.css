@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Inter font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-inter text-black bg-white;
+  }
+
+  h1 {
+    @apply text-display-xl;
+  }
+
+  h2 {
+    @apply text-heading-m;
+  }
+
+  p {
+    @apply text-body-m;
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-16;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-orange text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2;
+  }
+
+  .link {
+    @apply text-orange hover:underline focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2;
+  }
+
+  /* Header/Nav styles */
+  .nav-link {
+    @apply relative inline-block py-2 px-3 text-black font-medium transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-orange transition-all duration-200;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  /* Focus states for a11y */
+  .focus-visible {
+    @apply outline-none ring-2 ring-orange ring-offset-2;
+  }
+}
+
+@layer utilities {
+  .scroll-reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-300;
+  }
+
+  .scroll-reveal.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Staggered reveal animation */
+  .stagger-1 {
+    transition-delay: 60ms;
+  }
+  .stagger-2 {
+    transition-delay: 120ms;
+  }
+  .stagger-3 {
+    transition-delay: 180ms;
+  }
+  .stagger-4 {
+    transition-delay: 240ms;
+  }
+  .stagger-5 {
+    transition-delay: 300ms;
+  }
+  .stagger-6 {
+    transition-delay: 360ms;
+  }
+}
