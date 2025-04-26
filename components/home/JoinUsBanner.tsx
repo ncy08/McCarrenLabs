@@ -4,13 +4,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Container from "../Container";
+import GridBand from "../ui/GridBand";
 
 export default function JoinUsBanner() {
   return (
     <section className="py-24 md:py-40">
-      <Container>
+      <GridBand>
         <motion.div
+          className="col-start-2 col-end-12 lg:col-end-10"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -30,9 +31,13 @@ export default function JoinUsBanner() {
           {/* Team Photos Gallery */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[1, 2, 3, 4].map((i) => (
-              <div
+              <motion.div
                 key={i}
                 className="aspect-[3/4] rounded-3xl overflow-hidden bg-gray-100"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * i }}
+                viewport={{ once: true, margin: "-50px" }}
               >
                 <Image
                   src={`/images/team/placeholder-${i}.svg`}
@@ -41,20 +46,27 @@ export default function JoinUsBanner() {
                   height={400}
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <Link
-            href="https://jobs.ashbyhq.com/sesame"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-md border border-accent px-4 py-2 text-accent font-medium hover:bg-accent/10"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true }}
           >
-            Careers at Sesame
-          </Link>
+            <Link
+              href="https://jobs.ashbyhq.com/sesame"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 rounded-md border border-accent px-4 py-2 text-accent font-medium hover:bg-accent/10"
+            >
+              Careers at Sesame
+            </Link>
+          </motion.div>
         </motion.div>
-      </Container>
+      </GridBand>
     </section>
   );
 }

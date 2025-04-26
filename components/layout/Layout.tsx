@@ -8,10 +8,12 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white">
       <Header />
-      <main className="flex-grow">{children}</main>
-      <Footer />
+      <div className="md:pl-[var(--s200)]">
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </div>
     </div>
   );
 }

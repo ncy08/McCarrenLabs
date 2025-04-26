@@ -2,19 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Local Season Sans TRIAL font declarations */
+@font-face {
+  font-family: "the-seasons";
+  src: url("/fonts/season/SeasonSansTRIAL-Regular.woff2") format("woff2"),
+    url("/fonts/season/SeasonSansTRIAL-Regular.woff") format("woff"),
+    url("/fonts/season/SeasonSansTRIAL-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "the-seasons";
+  src: url("/fonts/season/SeasonSansTRIAL-RegularItalic.woff2") format("woff2"),
+    url("/fonts/season/SeasonSansTRIAL-RegularItalic.woff") format("woff"),
+    url("/fonts/season/SeasonSansTRIAL-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "the-seasons";
+  src: url("/fonts/season/SeasonSansTRIAL-Medium.woff2") format("woff2"),
+    url("/fonts/season/SeasonSansTRIAL-Medium.woff") format("woff"),
+    url("/fonts/season/SeasonSansTRIAL-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "the-seasons";
+  src: url("/fonts/season/SeasonSansTRIAL-SemiBold.woff2") format("woff2"),
+    url("/fonts/season/SeasonSansTRIAL-SemiBold.woff") format("woff"),
+    url("/fonts/season/SeasonSansTRIAL-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "the-seasons";
+  src: url("/fonts/season/SeasonSansTRIAL-Bold.woff2") format("woff2"),
+    url("/fonts/season/SeasonSansTRIAL-Bold.woff") format("woff"),
+    url("/fonts/season/SeasonSansTRIAL-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Import Inter font from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
-/* Season Variable Font */
-@font-face {
-  font-family: "Season";
-  src: url("/fonts/season/Season-Variable.woff2") format("woff2"),
-    url("/fonts/season/Season-Variable.woff") format("woff");
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: normal;
-  font-variation-settings: "wght" 400;
-}
+/* Import hamburger menu styles */
+@import "./hamburger.css";
 
 :root {
   --clr-text: #0a0a0a;
@@ -29,8 +72,14 @@
 
   body {
     @apply font-sans text-[var(--clr-text)] bg-white;
-    font-family: "Season", -apple-system, BlinkMacSystemFont, system-ui,
-      sans-serif;
+    font-family: "the-seasons", sans-serif;
+    color: #0a0a0a;
+    background: #ffffff;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1 {
@@ -43,6 +92,12 @@
 
   p {
     @apply text-body;
+  }
+
+  /* Accessible focus rings */
+  :focus-visible {
+    outline: 2px solid #0a0a0a;
+    outline-offset: 2px;
   }
 
   /* Reduced motion preferences */
@@ -110,5 +165,10 @@
 
   .body-lg {
     @apply text-xl md:text-[20px] leading-relaxed;
+  }
+
+  /* Custom serif style for headings */
+  .font-serifify {
+    font-variation-settings: "SERF" 33;
   }
 }

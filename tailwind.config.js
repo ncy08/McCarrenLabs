@@ -27,7 +27,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "Season",
+          "the-seasons",
           "-apple-system",
           "BlinkMacSystemFont",
           "system-ui",
