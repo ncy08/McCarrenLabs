@@ -1,20 +1,15 @@
-import React from "react";
-import { NextPage } from "next";
-import Head from "next/head";
 import Layout from "@/components/layout/Layout";
 import Button from "@/components/ui/Button";
 
-const DemoPage: NextPage = () => {
+export const metadata = {
+  title: "Try Our Demo | Sesame",
+  description:
+    "Experience our voice technology demonstration and cross the uncanny valley of conversational voice.",
+};
+
+export default function DemoPage() {
   return (
     <Layout>
-      <Head>
-        <title>Try Our Demo | Sesame</title>
-        <meta
-          name="description"
-          content="Experience our voice technology demonstration and cross the uncanny valley of conversational voice."
-        />
-      </Head>
-
       <section className="pt-32 pb-20 md:py-32 bg-white">
         <div className="container px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">
@@ -75,6 +70,4 @@ const DemoPage: NextPage = () => {
       </section>
     </Layout>
   );
-};
-
-export default DemoPage;
+}

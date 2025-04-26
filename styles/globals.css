@@ -54,26 +54,27 @@
 }
 
 /* Import Inter font from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 /* Import hamburger menu styles */
 @import "./hamburger.css";
 
 :root {
-  --clr-text: #0a0a0a;
-  --clr-accent: #0066ff; /* link + button */
+  --clr-primary: #111113;
+  --clr-accent: #f4b41a;
+  --clr-mute: #f7f7f8;
   --space: 0.5rem; /* 8 px rhythm */
 }
 
 @layer base {
   html {
     @apply scroll-smooth;
+    font-size: 112.5%; /* 18px base font size (112.5% of 16px) */
   }
 
   body {
-    @apply font-sans text-[var(--clr-text)] bg-white;
-    font-family: "the-seasons", sans-serif;
-    color: #0a0a0a;
+    @apply font-sans text-sesame-primary bg-white;
+    color: var(--clr-primary);
     background: #ffffff;
     width: 100%;
     overflow-x: hidden;
@@ -91,12 +92,12 @@
   }
 
   p {
-    @apply text-body;
+    @apply text-body text-gray-700;
   }
 
   /* Accessible focus rings */
   :focus-visible {
-    outline: 2px solid #0a0a0a;
+    outline: 2px solid var(--clr-primary);
     outline-offset: 2px;
   }
 
@@ -123,25 +124,35 @@
   }
 
   .btn-primary {
-    @apply bg-[var(--clr-accent)] text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--clr-accent)] focus:ring-offset-2;
+    @apply bg-sesame-accent text-sesame-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-sesame-accent focus:ring-offset-2;
   }
 
   .link {
-    @apply text-[var(--clr-accent)] hover:underline focus:outline-none focus:ring-2 focus:ring-[var(--clr-accent)] focus:ring-offset-2;
+    @apply text-sesame-primary hover:text-sesame-accent hover:underline focus:outline-none focus:ring-2 focus:ring-sesame-accent focus:ring-offset-2;
+  }
+
+  /* Global hover link style */
+  .hover-link {
+    @apply transition-colors duration-150 hover:text-sesame-accent focus-visible:text-sesame-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sesame-accent focus-visible:ring-offset-2;
   }
 
   /* Header/Nav styles */
   .nav-link {
-    @apply relative inline-block py-2 px-3 font-medium transition-colors duration-200 hover:text-[var(--clr-accent)];
+    @apply relative inline-block py-2 px-3 font-medium transition-colors duration-200 hover:text-sesame-accent;
   }
 
   .nav-link.active::after {
-    @apply content-[''] absolute bottom-0 left-0 w-full h-0.5 bg-[var(--clr-accent)];
+    @apply content-[''] absolute bottom-0 left-0 w-full h-0.5 bg-sesame-accent;
+  }
+
+  /* 10-column grid layout that sesame.com uses */
+  .grid-10 {
+    @apply grid grid-cols-[repeat(10,minmax(0,1fr))] gap-4;
   }
 
   /* Focus states for a11y */
   .focus-visible {
-    @apply outline-none ring-2 ring-[var(--clr-accent)] ring-offset-2;
+    @apply outline-none ring-2 ring-sesame-accent ring-offset-2;
   }
 }
 

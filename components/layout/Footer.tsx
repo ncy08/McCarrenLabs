@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Container from "../Container";
 
 /**
  * Footer Component with minimal Sesame-style design
@@ -9,43 +8,56 @@ import Container from "../Container";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/research", label: "Research" },
+    { href: "/team", label: "Team" },
+    { href: "/contact", label: "Contact us" },
+  ];
+
+  const legalItems = [
+    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/terms", label: "Terms of Service" },
+  ];
+
   return (
-    <footer className="py-8 border-t border-neutral-200">
-      <Container>
-        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 justify-between">
-          <small className="text-sm font-medium">
-            <Link href="/" className="hover:text-accent">
-              Home
-            </Link>{" "}
-            &middot;{" "}
-            <Link href="/research" className="hover:text-accent ml-2">
-              Research
-            </Link>{" "}
-            &middot;{" "}
-            <Link href="/team" className="hover:text-accent ml-2">
-              Team
-            </Link>{" "}
-            &middot;{" "}
-            <Link href="/contact" className="hover:text-accent ml-2">
-              Contact us
-            </Link>
-          </small>
+    <footer className="py-12 border-t border-neutral-200">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center space-y-6">
+          {/* Main navigation - centered on one line */}
+          <nav className="flex flex-wrap justify-center gap-x-6">
+            {navItems.map((item, index) => (
+              <div key={item.href} className="flex items-center">
+                <Link href={item.href} className="hover-link">
+                  {item.label}
+                </Link>
+                {index < navItems.length - 1 && (
+                  <span className="text-gray-300 ml-6">|</span>
+                )}
+              </div>
+            ))}
+          </nav>
 
-          <small className="text-sm font-medium">
-            &copy; {currentYear} Sesame AI Inc.
-          </small>
+          {/* Legal links - small caps */}
+          <div className="flex flex-wrap justify-center gap-x-6 text-sm text-gray-500 uppercase tracking-wider">
+            {legalItems.map((item, index) => (
+              <div key={item.href} className="flex items-center">
+                <Link href={item.href} className="hover-link">
+                  {item.label}
+                </Link>
+                {index < legalItems.length - 1 && (
+                  <span className="mx-2">|</span>
+                )}
+              </div>
+            ))}
+          </div>
 
-          <small className="text-sm font-medium">
-            <Link href="/privacy" className="hover:text-accent">
-              Privacy
-            </Link>{" "}
-            &middot;{" "}
-            <Link href="/terms" className="hover:text-accent ml-2">
-              Terms
-            </Link>
-          </small>
+          {/* Copyright */}
+          <div className="text-sm text-gray-500">
+            &copy; {currentYear} Sesame AI Inc. All rights reserved.
+          </div>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

@@ -7,10 +7,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
       colors: {
+        sesame: {
+          primary: "#111113",
+          accent: "#F4B41A", // yellow highlight on hover
+          mute: "#F7F7F8", // light grey backgrounds
+        },
         black: "#0A0A0A",
         white: "#FFFFFF",
-        accent: "#0066FF",
         neutral: {
           100: "#F5F5F5",
           200: "#EEEEEE",
@@ -26,13 +33,7 @@ module.exports = {
         ink: "#0A0A0A",
       },
       fontFamily: {
-        sans: [
-          "the-seasons",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "system-ui",
-          "sans-serif",
-        ],
+        sans: ["Inter", "sans-serif"],
         inter: ["Inter", "sans-serif"],
         mono: ["Menlo", "Monaco", "Consolas", "monospace"],
       },

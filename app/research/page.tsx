@@ -1,20 +1,15 @@
-import React from "react";
-import { NextPage } from "next";
-import Head from "next/head";
 import Layout from "@/components/layout/Layout";
 import Button from "@/components/ui/Button";
 
-const ResearchPage: NextPage = () => {
+export const metadata = {
+  title: "Research | Sesame",
+  description:
+    "Explore our research on conversational voice technology and how we're crossing the uncanny valley of voice.",
+};
+
+export default function ResearchPage() {
   return (
     <Layout>
-      <Head>
-        <title>Research | Sesame</title>
-        <meta
-          name="description"
-          content="Explore our research on conversational voice technology and how we're crossing the uncanny valley of voice."
-        />
-      </Head>
-
       <section className="pt-32 pb-16 md:py-32 bg-white">
         <div className="container px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-8">
@@ -74,6 +69,4 @@ const ResearchPage: NextPage = () => {
       </section>
     </Layout>
   );
-};
-
-export default ResearchPage;
+}

@@ -1,64 +1,61 @@
-import { ReactNode, ButtonHTMLAttributes } from "react";
-import Link from "next/link";
+"use client";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: ReactNode;
-  variant?: "primary" | "secondary" | "outline";
+import React from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+interface ButtonProps {
+  variant?: "primary" | "secondary";
   size?: "sm" | "md" | "lg";
   href?: string;
-  external?: boolean;
-};
+  className?: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+}
 
-const Button = ({
-  children,
+export default function Button({
   variant = "primary",
   size = "md",
   href,
-  external = false,
   className = "",
-  ...rest
-}: ButtonProps) => {
-  // Base styles
-  const baseStyles =
-    "inline-flex items-center justify-center transition-colors duration-200 font-medium rounded-md";
+  children,
+  onClick,
+}: ButtonProps) {
+  // Define classes based on variant and size
+  const baseClasses =
+    "inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
 
-  // Variant styles
-  const variantStyles = {
-    primary: "bg-orange text-white hover:bg-opacity-90",
-    secondary: "bg-black text-white hover:bg-opacity-90",
-    outline: "border border-black text-black hover:bg-black/5",
+  const variantClasses = {
+    primary:
+      "bg-sesame-accent text-sesame-primary hover:opacity-90 focus:ring-sesame-accent",
+    secondary:
+      "bg-transparent border-2 border-sesame-accent text-sesame-primary hover:bg-sesame-mute focus:ring-sesame-accent",
   };
 
-  // Size styles
-  const sizeStyles = {
-    sm: "text-sm py-2 px-4",
-    md: "py-3 px-6",
-    lg: "text-lg py-4 px-8",
+  const sizeClasses = {
+    sm: "text-sm px-3 py-1",
+    md: "px-5 py-2",
+    lg: "text-lg px-8 py-3",
   };
 
-  // Combined styles
-  const buttonStyles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+  const classes = cn(
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    className
+  );
 
-  // If href is provided, render as a link
   if (href) {
     return (
-      <Link
-        href={href}
-        className={buttonStyles}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noopener noreferrer" : undefined}
-      >
+      <Link href={href} className={classes}>
         {children}
       </Link>
     );
   }
 
-  // Otherwise render as a button
   return (
-    <button className={buttonStyles} {...rest}>
+    <button className={classes} onClick={onClick}>
       {children}
     </button>
   );
-};
-
-export default Button;
+}
