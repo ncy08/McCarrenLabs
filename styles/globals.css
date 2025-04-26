@@ -60,9 +60,12 @@
 @import "./hamburger.css";
 
 :root {
-  --clr-primary: #111113;
-  --clr-accent: #f4b41a;
-  --clr-mute: #f7f7f8;
+  --sesame-primary: #111113;
+  --sesame-accent: #f4b41a;
+  --sesame-bg: #f7f7f8;
+  --clr-primary: var(--sesame-primary);
+  --clr-accent: var(--sesame-accent);
+  --clr-mute: var(--sesame-bg);
   --space: 0.5rem; /* 8 px rhythm */
 }
 
@@ -70,11 +73,12 @@
   html {
     @apply scroll-smooth;
     font-size: 112.5%; /* 18px base font size (112.5% of 16px) */
+    font-family: Inter, sans-serif;
   }
 
   body {
     @apply font-sans text-sesame-primary bg-white;
-    color: var(--clr-primary);
+    color: var(--sesame-primary);
     background: #ffffff;
     width: 100%;
     overflow-x: hidden;
@@ -182,4 +186,27 @@
   .font-serifify {
     font-variation-settings: "SERF" 33;
   }
+}
+
+/* Swiper customizations */
+.team-gallery-swiper {
+  padding: 16px 8px;
+  margin: 0 -8px;
+}
+
+.team-gallery-swiper .swiper-button-next,
+.team-gallery-swiper .swiper-button-prev {
+  color: var(--sesame-primary);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.team-gallery-swiper .swiper-button-next:hover,
+.team-gallery-swiper .swiper-button-prev:hover {
+  opacity: 1;
+}
+
+.team-gallery-swiper .swiper-button-next:after,
+.team-gallery-swiper .swiper-button-prev:after {
+  font-size: 24px;
 }

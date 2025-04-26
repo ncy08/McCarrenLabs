@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import GridBand from "../ui/GridBand";
+import MotionSection from "../ui/MotionSection";
 
 /**
  * Goals Section Component
@@ -16,26 +17,24 @@ export default function GoalsSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="py-28 md:py-36">
+    <MotionSection className="py-28 md:py-36">
       <GridBand>
         <div className="col-start-2 col-end-12 space-y-24">
           {/* First Goal */}
           <div className="grid lg:grid-cols-10 gap-6 relative">
             {/* Number 01 - Absolute positioned large number */}
             <motion.div
-              className="absolute left-0 -translate-y-[-20%] select-none pointer-events-none"
+              className="absolute -left-6 -top-4 select-none pointer-events-none"
               initial={
                 prefersReducedMotion
                   ? { opacity: 1, y: 0 }
                   : { opacity: 0, y: 40 }
               }
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              <span className="text-[10rem] font-bold text-gray-200/60">
-                01
-              </span>
+              <span className="text-[9rem] font-bold text-gray-200/60">01</span>
             </motion.div>
 
             {/* Content - Left side spans 6 columns */}
@@ -47,7 +46,7 @@ export default function GoalsSection() {
                     : { opacity: 0, y: 40 }
                 }
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-100px" }}
               >
                 <h2 className="heading-2 font-semibold mb-4 text-[#111113]">
@@ -67,7 +66,7 @@ export default function GoalsSection() {
               </motion.div>
             </div>
 
-            {/* Right side - Empty 4 columns for future imagery */}
+            {/* Right side - Empty 4 columns for whitespace */}
             <div className="lg:col-span-4"></div>
           </div>
 
@@ -75,19 +74,17 @@ export default function GoalsSection() {
           <div className="grid lg:grid-cols-10 gap-6 relative">
             {/* Number 02 - Absolute positioned large number */}
             <motion.div
-              className="absolute left-0 -translate-y-[-20%] select-none pointer-events-none"
+              className="absolute -left-6 -top-4 select-none pointer-events-none"
               initial={
                 prefersReducedMotion
                   ? { opacity: 1, y: 0 }
                   : { opacity: 0, y: 40 }
               }
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              <span className="text-[10rem] font-bold text-gray-200/60">
-                02
-              </span>
+              <span className="text-[9rem] font-bold text-gray-200/60">02</span>
             </motion.div>
 
             {/* Content - Left side spans 6 columns */}
@@ -99,7 +96,7 @@ export default function GoalsSection() {
                     : { opacity: 0, y: 40 }
                 }
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-100px" }}
               >
                 <h2 className="heading-2 font-semibold mb-4 text-[#111113]">
@@ -115,11 +112,11 @@ export default function GoalsSection() {
               </motion.div>
             </div>
 
-            {/* Right side - Empty 4 columns for future imagery */}
+            {/* Right side - Empty 4 columns for whitespace */}
             <div className="lg:col-span-4"></div>
           </div>
         </div>
       </GridBand>
-    </section>
+    </MotionSection>
   );
 }

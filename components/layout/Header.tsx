@@ -52,8 +52,8 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 backdrop-blur w-full transition-all duration-200",
-        hasScrolled ? "bg-white/90 shadow-sm" : "bg-transparent"
+        "sticky top-0 backdrop-blur-lg bg-white/80 supports-backdrop:backdrop-blur z-40 w-full transition-all duration-200",
+        hasScrolled ? "shadow-sm" : ""
       )}
     >
       <div className="container mx-auto px-4">
@@ -67,7 +67,7 @@ export default function Header() {
 
             {/* Navigation links */}
             <nav className="hidden md:flex items-center gap-4">
-              {nav.slice(1).map((item) => (
+              {nav.slice(1, 3).map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -82,8 +82,8 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* Right block: CTA button */}
-          <div>
+          {/* Right block: CTA button with ml-auto to push to far-right */}
+          <div className="ml-auto">
             <Link
               href="/demo"
               className="rounded-full border border-sesame-primary px-4 py-1 hover:bg-white/10 transition-colors"
@@ -96,7 +96,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             type="button"
-            className="flex md:hidden items-center p-2"
+            className="flex md:hidden items-center p-2 ml-4"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}

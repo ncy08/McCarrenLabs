@@ -8,6 +8,7 @@ interface ButtonProps {
   variant?: "primary" | "secondary";
   size?: "sm" | "md" | "lg";
   href?: string;
+  external?: boolean;
   className?: string;
   children: React.ReactNode;
   onClick?: () => void;
@@ -17,6 +18,7 @@ export default function Button({
   variant = "primary",
   size = "md",
   href,
+  external = false,
   className = "",
   children,
   onClick,
@@ -46,8 +48,12 @@ export default function Button({
   );
 
   if (href) {
+    const linkProps = external
+      ? { target: "_blank", rel: "noopener noreferrer" }
+      : {};
+
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} {...linkProps} onClick={onClick}>
         {children}
       </Link>
     );

@@ -4,17 +4,30 @@ import React from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import GridBand from "../ui/GridBand";
+import MotionSection from "../ui/MotionSection";
 
 export default function HeroSection() {
   // Check if user prefers reduced motion
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="py-28 md:py-36 relative">
-      {/* Radial gradient accent for large screens */}
-      <div className="hidden lg:block absolute top-0 left-1/4 w-[600px] h-[600px] pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-radial from-[#FED54A]/30 to-transparent opacity-70"></div>
-      </div>
+    <MotionSection className="py-28 md:py-36 relative">
+      {/* Radial gradient accent as pseudo-element with the exact specs requested */}
+      <style jsx>{`
+        section::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: radial-gradient(
+            62.5% 62.5% at 50% 38%,
+            rgba(244, 180, 26, 0.25),
+            transparent 70%
+          );
+          pointer-events: none;
+          mix-blend-mode: screen;
+        }
+      `}</style>
 
       <GridBand>
         {/* Switch from centered copy on <md to 2-column on lg */}
@@ -26,7 +39,7 @@ export default function HeroSection() {
                 : { opacity: 0, y: 40 }
             }
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-6xl font-semibold leading-[1.1] tracking-tight relative z-10 text-[#111113]"
           >
             Bringing the computer to life
@@ -39,13 +52,27 @@ export default function HeroSection() {
                 : { opacity: 0, y: 40 }
             }
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
             className="mt-6 text-body text-gray-700 max-w-[60ch]"
           >
             We believe in a future where computers are lifelike. They will see,
             hear, and collaborate with us the way we're used to. A natural human
             voice is key to unlocking this future.
           </motion.p>
+
+          <motion.a
+            initial={
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 40 }
+            }
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+            href="#"
+            className="mt-4 inline-block text-sesame-accent underline underline-offset-4"
+          >
+            Crossing the uncanny valley of conversational voice
+          </motion.a>
 
           <motion.div
             className="my-12 w-full h-px bg-gray-200"
@@ -55,7 +82,7 @@ export default function HeroSection() {
                 : { opacity: 0, scaleX: 0 }
             }
             whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
             style={{ transformOrigin: "left" }}
           ></motion.div>
@@ -67,7 +94,7 @@ export default function HeroSection() {
                 : { opacity: 0, y: 40 }
             }
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             className="mt-6 mb-12 text-body text-gray-700 max-w-[60ch]"
           >
             To start, we have two goals.
@@ -80,7 +107,7 @@ export default function HeroSection() {
                 : { opacity: 0, y: 40 }
             }
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
           >
             <Link
               href="/demo"
@@ -92,6 +119,6 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </GridBand>
-    </section>
+    </MotionSection>
   );
 }

@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import Script from "next/script";
+import Layout from "@/components/layout/Layout";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
+    <html lang="en" className={inter.className}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -28,7 +29,7 @@ export default function RootLayout({
           id="scroll-wrapper"
           className="overflow-y-scroll h-[100dvh] relative z-0"
         >
-          {children}
+          <Layout>{children}</Layout>
         </div>
 
         {/* Script for analytics */}

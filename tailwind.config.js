@@ -12,9 +12,9 @@ module.exports = {
       },
       colors: {
         sesame: {
-          primary: "#111113",
-          accent: "#F4B41A", // yellow highlight on hover
-          mute: "#F7F7F8", // light grey backgrounds
+          primary: "var(--sesame-primary)",
+          accent: "var(--sesame-accent)", // yellow highlight on hover
+          mute: "var(--sesame-bg)", // light grey backgrounds
         },
         black: "#0A0A0A",
         white: "#FFFFFF",
