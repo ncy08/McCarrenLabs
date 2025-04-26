@@ -5,6 +5,17 @@
 /* Import Inter font from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
+/* Season Variable Font */
+@font-face {
+  font-family: "Season";
+  src: url("/fonts/season/Season-Variable.woff2") format("woff2"),
+    url("/fonts/season/Season-Variable.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-variation-settings: "wght" 400;
+}
+
 :root {
   --clr-text: #0a0a0a;
   --clr-accent: #0066ff; /* link + button */
@@ -17,19 +28,21 @@
   }
 
   body {
-    @apply font-inter text-[var(--clr-text)] bg-white;
+    @apply font-sans text-[var(--clr-text)] bg-white;
+    font-family: "Season", -apple-system, BlinkMacSystemFont, system-ui,
+      sans-serif;
   }
 
   h1 {
-    @apply text-5xl md:text-7xl leading-[1.05];
+    @apply text-h1;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl font-semibold;
+    @apply text-h2;
   }
 
   p {
-    @apply text-lg md:text-xl;
+    @apply text-body;
   }
 
   /* Reduced motion preferences */
