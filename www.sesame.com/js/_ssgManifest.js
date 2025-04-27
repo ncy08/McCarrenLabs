@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002F","\u002F404","\u002F500","\u002Fdebug-user","\u002Flogin","\u002Fprivacy","\u002Fresearch\u002Fcrossing_the_uncanny_valley_of_voice","\u002Fteam","\u002Fterms","\u002Fupdates","\u002Fupdates\u002F[slug]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

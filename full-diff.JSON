@@ -1,0 +1,173 @@
+{
+  "page": "/",
+  "target_site": "https://www.sesame.com",
+  "mock_site": "https://mccarrenlabs.vercel.app",
+
+  "issues": [
+    {
+      "id": "NAV-01",
+      "breakpoints": ["desktop"],
+      "file_to_edit": [
+        "components/layout/Layout.tsx",
+        "components/layout/Header.tsx"
+      ],
+      "what_is_wrong": "Sidebar exists but spacing / link order differ from target.",
+      "instructions": [
+        "In Layout.tsx find the <aside> nav.",
+        "Order links exactly ['Sesame','Research','Team','Demo','Contact us'].",
+        "Add Tailwind classes: fixed left-0 top-0 h-screen pl-8 pt-8 border-r border-fog hidden xl:flex flex-col gap-4.",
+        "Hide horizontal header links on xl+ (`xl:hidden`)."
+      ]
+    },
+    {
+      "id": "NAV-02",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/layout/Header.tsx"],
+      "what_is_wrong": "Extraneous 'Log in' link.",
+      "instructions": ["Delete the element that renders 'Log in'."]
+    },
+    {
+      "id": "NAV-03",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["app/page.tsx"],
+      "what_is_wrong": "Header/nav rendered three times.",
+      "instructions": [
+        "Ensure only one <Header /> (and Layout wrapper) is rendered."
+      ]
+    },
+
+    {
+      "id": "HERO-01",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/home/HeroSection.tsx"],
+      "what_is_wrong": "Hero H1 weight/width off.",
+      "instructions": [
+        "Set className on the <h1>: font-semibold text-[clamp(40px,4vw,64px)] max-w-[24ch] leading-tight font-seasons."
+      ]
+    },
+    {
+      "id": "HERO-02",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/home/HeroSection.tsx"],
+      "what_is_wrong": "Anchor text should read 'Try our research demo.'",
+      "instructions": ["Replace innerText accordingly (keep inline)."]
+    },
+
+    {
+      "id": "SEC-SETUP",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/ui/Section.tsx"],
+      "what_is_wrong": "Reusable section wrapper missing.",
+      "instructions": [
+        "Create components/ui/Section.tsx:",
+        "  export default function Section({num,children}:{num?:string;children:React.ReactNode}){",
+        "    return (<section className='relative px-[6vw] py-14'>",
+        "      {num && (<span className='absolute -top-10 left-0 text-[40vw] text-fog/60 select-none'>{num}</span>)}",
+        "      <div className='relative z-10'>{children}</div>",
+        "      <hr className='h-px bg-fog border-0 absolute inset-x-0 -bottom-px'/>",
+        "    </section>);",
+        "  }"
+      ]
+    },
+
+    {
+      "id": "CARD-WAVE",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": [
+        "components/home/CardWaveform.tsx",
+        "components/home/HeroSection.tsx"
+      ],
+      "what_is_wrong": "Waveform research card missing.",
+      "instructions": [
+        "Create components/home/CardWaveform.tsx with:",
+        "  <div className='rounded-lg border border-fog shadow-sm mt-8'>",
+        "    <img src='/images/waveform.svg' alt='' className='w-full'/>",
+        "    <p className='p-4 text-sm flex justify-between'>",
+        "      <span>Crossing the uncanny valley of conversational voice</span>",
+        "      <span className='text-xl'>↗</span>",
+        "    </p>",
+        "  </div>",
+        "Import and insert <CardWaveform /> right after the 'Try our research demo.' sentence in HeroSection.tsx."
+      ]
+    },
+    {
+      "id": "IMG-EYE",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/home/GoalsSection.tsx"],
+      "what_is_wrong": "Eyewear image missing.",
+      "instructions": [
+        "Add eyewear.jpg to /public/images/eyewear.jpg.",
+        "In GoalsSection.tsx (or whichever file contains 'Lightweight eyewear') render:",
+        "  <Image src='/images/eyewear.jpg' alt='' width={800} height={540} className='w-full rounded-lg shadow-sm mt-8' />"
+      ]
+    },
+    {
+      "id": "GRID-STAFF",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/home/JoinUsBanner.tsx"],
+      "what_is_wrong": "Staff photos 404; grid collapses.",
+      "instructions": [
+        "Add team1.jpg and team2.jpg to /public/images/team/.",
+        "Wrap images in <div className='grid grid-cols-2 gap-6 mt-10'>."
+      ]
+    },
+
+    {
+      "id": "FOOTER-01",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/layout/Footer.tsx"],
+      "what_is_wrong": "Social icons missing and 'Contact us' inline.",
+      "instructions": [
+        "Save X.svg and linkedin.svg to /public/icons/.",
+        "Render icons above legal lines using <div className='flex gap-4 mt-8'>.",
+        "Move 'Contact us' into its own <div className='mt-4'> below the nav list."
+      ]
+    },
+
+    {
+      "id": "TOKEN-FOG",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["tailwind.config.js"],
+      "what_is_wrong": "fog colour token wrong.",
+      "instructions": ["Add `colors: { fog: '#E5E5E5' }` under `extend:`."]
+    },
+    {
+      "id": "LINK-HOVER",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["styles/globals.css"],
+      "what_is_wrong": "Links always underlined; target underlines on hover.",
+      "instructions": [
+        "Add utility:",
+        "  a{@apply underline decoration-ink/0;}",
+        "  a:hover{@apply decoration-ink;}"
+      ]
+    },
+    {
+      "id": "PADDING",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/ui/Section.tsx"],
+      "what_is_wrong": "Side padding and vertical gap incorrect.",
+      "instructions": ["Ensure wrapper has `px-[6vw] py-14`."]
+    },
+    {
+      "id": "IMG-STYLES",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": [
+        "components/home/CardWaveform.tsx",
+        "components/home/GoalsSection.tsx",
+        "components/home/JoinUsBanner.tsx"
+      ],
+      "what_is_wrong": "Cards / images lack 8-px radius + shadow.",
+      "instructions": ["Add Tailwind `rounded-lg shadow-sm` as needed."]
+    },
+    {
+      "id": "CLEANUP",
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "file_to_edit": ["components/home/GoalsSection.tsx"],
+      "what_is_wrong": "Stray anchor 'Designed for all-day comfort' (broken alt).",
+      "instructions": ["Delete that orphan <a> element."]
+    }
+  ],
+
+  "colour_tokens": { "ink": "#111111", "fog": "#E5E5E5" }
+}

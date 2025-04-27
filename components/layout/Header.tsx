@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { clsx } from "clsx";
 
 export default function Header() {
   const pathname = usePathname();
@@ -44,95 +46,94 @@ export default function Header() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { href: "/", label: "Sesame" },
+    { href: "/", label: "Home" },
     { href: "/research", label: "Research" },
     { href: "/team", label: "Team" },
+    { href: "/demo", label: "Demo" },
+    { href: "#login", label: "Log in" },
   ];
 
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 bg-white/90 backdrop-blur transition-shadow duration-300"
+      className="sticky top-0 z-50 bg-light1 transition-shadow duration-300 h-[64px] flex items-center"
     >
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 h-16">
-        {/* Left block: Logo and navigation links */}
-        <div className="flex items-center gap-4 sm:gap-6">
-          {/* Logo wordmark */}
-          <Link href="/" className="font-season font-medium text-lg">
-            Sesame
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav
-            aria-label="Desktop navigation"
-            className="hidden md:flex items-center gap-4 sm:gap-6"
-          >
-            {navLinks.slice(1).map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "nav-link text-base font-medium",
-                  pathname === item.href ? "active" : ""
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-
-        {/* Demo CTA button - visible on all screen sizes */}
-        <div className="ml-auto">
-          <Link
-            href="/demo"
-            className={cn(
-              "demo-cta px-4 py-1.5 sm:px-5 sm:py-2",
-              pathname === "/demo" ? "active" : ""
-            )}
-            aria-label="Try our demo"
-          >
-            Demo
+      <div className="w-full flex items-center justify-between px-[6vw]">
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/leaf-logo.svg"
+              alt="Sesame Logo"
+              width={26}
+              height={26}
+              className="w-[26px] h-[26px]"
+            />
           </Link>
         </div>
+
+        {/* Desktop Navigation Links - only for medium devices, not large (lg uses sidebar) */}
+        <nav className="hidden md:flex lg:hidden items-center gap-[var(--s16)]">
+          {navLinks.slice(1).map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={clsx(
+                "text-sidebar-light transition-colors duration-200",
+                item.href === "#login"
+                  ? "text-tertiary hover:text-secondary"
+                  : pathname === item.href
+                  ? "text-main"
+                  : "text-secondary hover:text-main"
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* Mobile menu button */}
         <button
           type="button"
-          className={cn(
-            "hamburger hamburger--spin md:hidden ml-2 sm:ml-4",
-            isMenuOpen ? "is-active" : ""
-          )}
+          className="md:lg:hidden p-[var(--s4)] pt-[6px]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-expanded={isMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-controls="mobile-menu"
         >
-          <span className="hamburger-box">
-            <span className="hamburger-inner"></span>
-          </span>
+          <div
+            className={cn(
+              "hamburger w-[24px] h-[24px]",
+              isMenuOpen && "is-active"
+            )}
+          >
+            <span className="hamburger-box">
+              <span className="hamburger-inner"></span>
+            </span>
+          </div>
         </button>
       </div>
 
-      {/* Mobile menu (separate nav element for mobile) */}
+      {/* Mobile menu */}
       <div
         id="mobile-menu"
         className={cn(
-          "fixed md:hidden inset-0 top-16 bg-white z-40 transition-transform duration-300 ease-in-out",
+          "fixed md:hidden inset-0 top-[var(--s40)] bg-light1 z-40 transition-transform duration-300 ease-in-out",
           isMenuOpen ? "transform-none" : "translate-y-full"
         )}
       >
-        <nav
-          aria-label="Mobile navigation"
-          className="flex flex-col p-4 sm:p-6 h-full"
-        >
-          {[...navLinks, { href: "/demo", label: "Demo" }].map((item) => (
+        <nav className="flex flex-col p-[var(--s16)] h-full">
+          {navLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={cn(
-                "py-2 sm:py-3 text-lg sm:text-xl font-medium transition-colors hover:text-sesame-accent",
-                pathname === item.href ? "text-sesame-accent" : ""
+              className={clsx(
+                "py-[var(--s12)] text-sidebar border-normal/10",
+                item.href === "#login"
+                  ? "text-tertiary"
+                  : pathname === item.href
+                  ? "text-main"
+                  : "text-secondary"
               )}
               onClick={() => setIsMenuOpen(false)}
             >

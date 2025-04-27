@@ -1,18 +1,12 @@
 /*!
- * Hamburgers
- * @description Tasty CSS-animated hamburgers
- * @author Jonathan Suh @jonsuh
- * @site https://jonsuh.com/hamburgers
- * @link https://github.com/jonsuh/hamburgers
+ * Hamburger menu style
+ * Based on the styling from Sesame.com
  */
 
 .hamburger {
-  padding: 15px 15px;
-  display: inline-block;
   cursor: pointer;
   transition-property: opacity, filter;
-  transition-duration: 0.15s;
-  transition-timing-function: linear;
+  transition-duration: 1s;
   font: inherit;
   color: inherit;
   text-transform: none;
@@ -22,92 +16,65 @@
   overflow: visible;
 }
 
-.hamburger:hover {
-  opacity: 0.7;
-}
-
-.hamburger.is-active:hover {
-  opacity: 0.7;
-}
-
-.hamburger.is-active .hamburger-inner,
-.hamburger.is-active .hamburger-inner::before,
-.hamburger.is-active .hamburger-inner::after {
-  background-color: #000;
-}
-
 .hamburger-box {
-  width: 24px;
-  height: 24px;
-  display: inline-block;
+  --hamburger-height: 0.7rem;
+  --hamburger-width: 1.3rem;
+  display: block;
+  width: var(--hamburger-width);
+  height: var(--hamburger-height);
   position: relative;
+}
+
+.hamburger-box:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--hamburger-width) * 1.5);
+  height: calc(var(--hamburger-width) * 1.5);
 }
 
 .hamburger-inner {
   display: block;
-  top: 50%;
-  margin-top: -2px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
 }
 
-.hamburger-inner,
-.hamburger-inner::before,
-.hamburger-inner::after {
-  width: 24px;
-  height: 2px;
-  background-color: #000;
-  border-radius: 4px;
+.hamburger-inner:before,
+.hamburger-inner:after {
   position: absolute;
-  transition-property: transform;
-  transition-duration: 0.15s;
-  transition-timing-function: ease;
-}
-
-.hamburger-inner::before,
-.hamburger-inner::after {
   content: "";
-  display: block;
+  height: 3px;
+  border-radius: 3px;
+  left: 0;
+  width: 100%;
+  background: rgb(var(--color-main-text));
 }
 
-.hamburger-inner::before {
-  top: -8px;
-}
-
-.hamburger-inner::after {
-  bottom: -8px;
-}
-
-/*
- * Spin
- */
-.hamburger--spin .hamburger-inner {
-  transition-duration: 0.22s;
-  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-
-.hamburger--spin .hamburger-inner::before {
-  transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
-}
-
-.hamburger--spin .hamburger-inner::after {
-  transition: bottom 0.1s 0.25s ease-in,
-    transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-
-.hamburger--spin.is-active .hamburger-inner {
-  transform: rotate(225deg);
-  transition-delay: 0.12s;
-  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-.hamburger--spin.is-active .hamburger-inner::before {
+.hamburger-inner:before {
   top: 0;
-  opacity: 0;
-  transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
+  transition: transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
-.hamburger--spin.is-active .hamburger-inner::after {
+.hamburger-inner:after {
   bottom: 0;
-  transform: rotate(-90deg);
-  transition: bottom 0.1s ease-out,
-    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+}
+
+.hamburger.is-active .hamburger-inner {
+  transform: rotate(180deg);
+}
+
+.hamburger.is-active .hamburger-inner:before {
+  --transition-y: calc(var(--hamburger-height) * 0.5 - 50%);
+  transform: translateY(var(--transition-y)) rotate(45deg);
+}
+
+.hamburger.is-active .hamburger-inner:after {
+  --transition-y: calc(-0.5 * var(--hamburger-height) + 50%);
+  transform: translateY(var(--transition-y)) rotate(-45deg);
 }

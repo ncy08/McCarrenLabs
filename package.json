@@ -34,10 +34,12 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "cypress": "^13.6.1",
+    "diffhtml": "^1.0.0-beta.30",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "jest-axe": "^8.0.0",
     "postcss": "^8",
+    "puppeteer": "^24.7.2",
     "twin.macro": "^3.4.1",
     "typescript": "^5",
     "vitest": "^1.0.4"
