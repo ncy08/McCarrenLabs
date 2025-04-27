@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 // Load local Season Sans TRIAL font
-export const season = localFont({
+const season = localFont({
   src: [
     {
       path: "../public/fonts/season/SeasonSansTRIAL-Regular.woff2",
