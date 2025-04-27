@@ -11,10 +11,11 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
       colors: {
+        fog: "#E5E5E5",
         sesame: {
           primary: "var(--sesame-primary)",
-          accent: "var(--sesame-accent)", // yellow highlight on hover
-          mute: "var(--sesame-bg)", // light grey backgrounds
+          accent: "var(--sesame-accent)",
+          mute: "var(--sesame-bg)",
         },
         black: "#0A0A0A",
         white: "#FFFFFF",
@@ -23,19 +24,34 @@ module.exports = {
           200: "#EEEEEE",
           300: "#E0E0E0",
         },
-        ink: "#0A0A0A",
-        light1: "#FFFFFF",
+        ink: "#111111",
+        light1: "rgb(var(--color-light-1))",
+        light2: "rgb(var(--color-light-2))",
+        light3: "rgb(var(--color-light-3))",
+        green1: "rgb(var(--color-green-1))",
+        green2: "rgb(var(--color-green-2))",
+        green3: "rgb(var(--color-green-3))",
+        green4: "rgb(var(--color-green-4))",
+        green5: "rgb(var(--color-green-5))",
+        green6: "rgb(var(--color-green-6))",
+        green7: "rgb(var(--color-green-7))",
+        main: "rgb(var(--color-main-text))",
+        secondary: "rgba(var(--color-main-text), 0.7)",
+        tertiary: "rgba(var(--color-main-text), 0.6)",
       },
       borderColor: {
         subtle: "#EEEEEE",
+        normal: "rgb(var(--color-gray-1))",
+        secondary: "rgba(var(--color-main-text), 0.7)",
       },
       ringColor: {
-        ink: "#0A0A0A",
+        ink: "#111111",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Season VF Sans", "var(--font-season)", "serif"],
         inter: ["Inter", "sans-serif"],
-        season: ["var(--font-season)", "serif"],
+        season: ["Season VF Sans", "var(--font-season)", "serif"],
+        seasons: ["Season VF Sans", "var(--font-season)", "serif"],
         mono: ["Menlo", "Monaco", "Consolas", "monospace"],
       },
       fontSize: {
@@ -44,7 +60,7 @@ module.exports = {
           { lineHeight: "1.05", fontWeight: "600", letterSpacing: "-0.02em" },
         ],
         "heading-2": ["2.5rem", { lineHeight: "1.2", fontWeight: "600" }],
-        "body-lg": ["1.25rem", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-lg": ["1.25rem", { lineHeight: "1.2", fontWeight: "400" }],
         h1: [
           "clamp(2.5rem, 5vw, 4.5rem)",
           { lineHeight: "1.05", fontWeight: "600" },
@@ -55,7 +71,19 @@ module.exports = {
         ],
         body: [
           "clamp(1rem, 1.2vw, 1.25rem)",
-          { lineHeight: "1.5", fontWeight: "400" },
+          { lineHeight: "1.2", fontWeight: "400" },
+        ],
+        sidebar: [
+          "1.125rem",
+          { lineHeight: "135%", fontWeight: "630", letterSpacing: "0.035em" },
+        ],
+        "sidebar-light": [
+          "1.125rem",
+          { lineHeight: "135%", fontWeight: "502", letterSpacing: "0.035em" },
+        ],
+        button: [
+          "0.93rem",
+          { lineHeight: "120%", fontWeight: "530", letterSpacing: "0.035em" },
         ],
       },
       spacing: {
@@ -91,6 +119,13 @@ module.exports = {
       },
       screens: {
         xs: "480px",
+        sm: "640px",
+        md: "768px",
+        mdlg: "900px",
+        lg: "1024px",
+        lglx: "1140px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
     },
   },

@@ -2,8 +2,6 @@
 
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import GridBand from "../ui/GridBand";
-import MotionSection from "../ui/MotionSection";
 
 /**
  * Hero Section Component
@@ -14,86 +12,35 @@ import MotionSection from "../ui/MotionSection";
  */
 
 export default function HeroSection() {
-  // Check if user prefers reduced motion
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <MotionSection className="pt-24 pb-16 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24 relative overflow-hidden">
-      {/* Radial gradient accent as pseudo-element with the exact specs requested */}
-      <style jsx>{`
-        section::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          background: radial-gradient(
-            70% 70% at 50% 30%,
-            rgba(244, 180, 26, 0.25),
-            transparent 70%
-          );
-          pointer-events: none;
-          mix-blend-mode: screen;
-          transform: translateY(-15%);
-        }
-      `}</style>
-
-      <GridBand>
-        <div className="col-span-full md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 xl:col-start-4 xl:col-end-10 relative">
-          <motion.h1
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 40 }
-            }
+    <section className="relative overflow-hidden bg-light1">
+      <div className="relative grid grid-cols-6 gap-4 md:gap-8 lg:gap-12 md:grid-cols-12 max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 mdlg:px-12 lg:px-16 lglx:px-20 xl:px-24 2xl:px-32 pt-12 md:pt-32 lg:pt-48 pb-8 md:pb-16">
+        <div className="col-span-6 md:col-span-10 md:col-start-2 lg:col-span-10 lg:col-start-2 xl:col-span-8 xl:col-start-3">
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="hero-heading font-season relative z-10 text-[#111113] max-w-[12ch]"
           >
-            Bringing the computer to life
-          </motion.h1>
+            <h1 className="font-medium text-[36px] md:text-[48px] leading-tight font-seasons max-w-[20ch]">
+              Bringing the computer to life
+            </h1>
 
-          <motion.p
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 40 }
-            }
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="hero-paragraph mt-6 md:mt-8 max-w-[52ch]"
-          >
-            We believe in a future where computers are lifelike. They will see,
-            hear, and collaborate with us the way we're used to. A natural human
-            voice is key to unlocking this future.
-          </motion.p>
+            <p className="mt-12 max-w-full md:max-w-[50ch] lg:max-w-[55ch] xl:max-w-[60ch] leading-tight text-[15px] sm:text-[16px] md:text-[18px] font-seasons text-ink/70">
+              We believe in a future where computers are lifelike. They will
+              see, hear, and collaborate with us the way we're used to. A
+              natural human voice is key to unlocking this future.
+            </p>
 
-          <motion.div
-            className="mt-12 mb-10 md:my-16 w-full h-px bg-gray-200"
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, scaleX: 1 }
-                : { opacity: 0, scaleX: 0 }
-            }
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true }}
-            style={{ transformOrigin: "left" }}
-          ></motion.div>
+            <div className="line my-8 bg-black/10 h-px w-full border-0" />
 
-          <motion.p
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 40 }
-            }
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            className="hero-paragraph mb-0"
-          >
-            To start, we have two goals.
-          </motion.p>
+            <p className="mt-16 mb-8 text-[18px] font-seasons font-medium">
+              To start, we have two goals.
+            </p>
+          </motion.div>
         </div>
-      </GridBand>
-    </MotionSection>
+      </div>
+    </section>
   );
 }
