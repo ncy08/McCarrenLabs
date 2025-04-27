@@ -40,7 +40,7 @@ export default function HeroSection() {
             }
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-6xl font-semibold leading-[1.1] tracking-tight relative z-10 text-[#111113]"
+            className="font-season text-6xl font-semibold leading-[1.1] tracking-tight relative z-10 text-[#111113]"
           >
             Bringing the computer to life
           </motion.h1>

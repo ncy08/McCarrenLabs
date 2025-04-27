@@ -59,7 +59,7 @@ export default function Header() {
         {/* Left block: Logo and navigation links */}
         <div className="flex items-center gap-4">
           {/* Logo wordmark */}
-          <Link href="/" className="font-medium">
+          <Link href="/" className="font-season font-medium text-lg">
             Sesame
           </Link>
 

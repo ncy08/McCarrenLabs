@@ -35,6 +35,7 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         inter: ["Inter", "sans-serif"],
+        season: ["var(--font-season)", "serif"],
         mono: ["Menlo", "Monaco", "Consolas", "monospace"],
       },
       fontSize: {
