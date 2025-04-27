@@ -37,23 +37,19 @@ const SwiperGallery = dynamic<SwiperGalleryProps>(
 
 // Create a fallback grid
 const ImageGrid = ({ images }: { images: string[] }) => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+  <ul role="list" className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
     {images.map((src, i) => (
-      <div
-        key={i}
-        className="aspect-square relative rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105"
-      >
+      <li key={i} className="team-photo">
         <Image
           src={src}
           alt={`Team member ${i + 1}`}
-          fill
-          sizes="(min-width:1024px) 25vw, 50vw"
-          className="object-cover"
-          loading="lazy"
+          width={720}
+          height={900}
+          className="rounded-xl object-cover w-full aspect-[3/4]"
         />
-      </div>
+      </li>
     ))}
-  </div>
+  </ul>
 );
 
 interface TeamGalleryProps {

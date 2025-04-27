@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import GridBand from "../ui/GridBand";
 import MotionSection from "../ui/MotionSection";
@@ -60,7 +61,7 @@ export default function HeroSection() {
             voice is key to unlocking this future.
           </motion.p>
 
-          <motion.a
+          <motion.div
             initial={
               prefersReducedMotion
                 ? { opacity: 1, y: 0 }
@@ -68,11 +69,18 @@ export default function HeroSection() {
             }
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-            href="#"
-            className="mt-4 inline-block text-sesame-accent underline underline-offset-4"
+            className="mt-8 mb-8"
           >
-            Crossing the uncanny valley of conversational voice
-          </motion.a>
+            <Image
+              src="/images/hero-placeholder.jpg"
+              alt="Illustration of Sesame agent"
+              width={1600}
+              height={1200}
+              priority
+              fetchPriority="high"
+              className="rounded-xl shadow-lg"
+            />
+          </motion.div>
 
           <motion.div
             className="my-12 w-full h-px bg-gray-200"

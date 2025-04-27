@@ -2,9 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import GridBand from "../ui/GridBand";
-import MotionSection from "../ui/MotionSection";
 
 /**
  * Goals Section Component
@@ -13,110 +10,57 @@ import MotionSection from "../ui/MotionSection";
  */
 
 export default function GoalsSection() {
-  // Check if user prefers reduced motion
-  const prefersReducedMotion = useReducedMotion();
-
   return (
-    <MotionSection className="py-28 md:py-36">
-      <GridBand>
-        <div className="col-start-2 col-end-12 space-y-24">
+    <section className="py-28 md:py-36 bg-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-bold mb-16 text-center">Our Goals</h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* First Goal */}
-          <div className="grid lg:grid-cols-10 gap-6 relative">
-            {/* Number 01 - Absolute positioned large number */}
-            <motion.div
-              className="absolute -left-6 -top-4 select-none pointer-events-none"
-              initial={
-                prefersReducedMotion
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 40 }
-              }
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <span className="text-[9rem] font-bold text-gray-200/60">01</span>
-            </motion.div>
-
-            {/* Content - Left side spans 6 columns */}
-            <div className="lg:col-span-6">
-              <motion.div
-                initial={
-                  prefersReducedMotion
-                    ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 40 }
-                }
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-100px" }}
-              >
-                <h2 className="heading-2 font-semibold mb-4 text-[#111113]">
-                  A personal companion
-                </h2>
-                <div className="prose max-w-md">
-                  <p className="text-body mb-6">
-                    An ever-present brilliant friend and conversationalist,
-                    keeping you informed and organized, helping you be a better
-                    version of yourself. Try our{" "}
-                    <Link href="/demo" className="hover-link">
-                      research demo
-                    </Link>{" "}
-                    to experience it.
-                  </p>
-                </div>
-              </motion.div>
+          <div className="bg-white p-8 rounded-lg shadow-md relative">
+            <span className="text-8xl font-bold text-gray-200 absolute -top-10 -left-6">
+              01
+            </span>
+            <div className="relative z-10">
+              <h3 className="text-2xl font-semibold mb-4">
+                A personal companion
+              </h3>
+              <h4 className="text-lg font-medium text-sesame-accent mb-3">
+                Crossing the uncanny valley of conversational voice
+              </h4>
+              <p className="mb-6 text-gray-700">
+                An ever-present brilliant friend and conversationalist, keeping
+                you informed and organized, helping you be a better version of
+                yourself. Try our{" "}
+                <Link href="/demo" className="text-blue-600 hover:underline">
+                  research demo
+                </Link>{" "}
+                to experience it.
+              </p>
             </div>
-
-            {/* Right side - Empty 4 columns for whitespace */}
-            <div className="lg:col-span-4"></div>
           </div>
 
           {/* Second Goal */}
-          <div className="grid lg:grid-cols-10 gap-6 relative">
-            {/* Number 02 - Absolute positioned large number */}
-            <motion.div
-              className="absolute -left-6 -top-4 select-none pointer-events-none"
-              initial={
-                prefersReducedMotion
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 40 }
-              }
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <span className="text-[9rem] font-bold text-gray-200/60">02</span>
-            </motion.div>
-
-            {/* Content - Left side spans 6 columns */}
-            <div className="lg:col-span-6">
-              <motion.div
-                initial={
-                  prefersReducedMotion
-                    ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 40 }
-                }
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-100px" }}
-              >
-                <h2 className="heading-2 font-semibold mb-4 text-[#111113]">
-                  Lightweight eyewear
-                </h2>
-                <div className="prose max-w-md">
-                  <p className="text-body mb-6">
-                    Designed to be worn all day, giving you high-quality audio
-                    and convenient access to your companion who can observe the
-                    world alongside you.
-                  </p>
-                </div>
-              </motion.div>
+          <div className="bg-white p-8 rounded-lg shadow-md relative">
+            <span className="text-8xl font-bold text-gray-200 absolute -top-10 -left-6">
+              02
+            </span>
+            <div className="relative z-10">
+              <h3 className="text-2xl font-semibold mb-4">
+                Lightweight eyewear
+              </h3>
+              <h4 className="text-lg font-medium text-sesame-accent mb-3">
+                Designed for all-day comfort
+              </h4>
+              <p className="mb-6 text-gray-700">
+                Designed to be worn all day, giving you high-quality audio and
+                convenient access to your companion who can observe the world
+                alongside you.
+              </p>
             </div>
-
-            {/* Right side - Empty 4 columns for whitespace */}
-            <div className="lg:col-span-4"></div>
           </div>
         </div>
-      </GridBand>
-    </MotionSection>
+      </div>
+    </section>
   );
 }
