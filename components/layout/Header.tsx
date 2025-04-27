@@ -43,35 +43,37 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
-  const nav = [
+  const navLinks = [
     { href: "/", label: "Sesame" },
     { href: "/research", label: "Research" },
     { href: "/team", label: "Team" },
-    { href: "/demo", label: "Demo" },
   ];
 
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 bg-white/70 backdrop-blur transition-shadow"
+      className="sticky top-0 z-50 bg-white/90 backdrop-blur transition-shadow duration-300"
     >
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 lg:px-10 h-16">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 h-16">
         {/* Left block: Logo and navigation links */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 sm:gap-6">
           {/* Logo wordmark */}
           <Link href="/" className="font-season font-medium text-lg">
             Sesame
           </Link>
 
-          {/* Navigation links */}
-          <nav className="hidden md:flex items-center gap-4">
-            {nav.slice(1, 3).map((item) => (
+          {/* Desktop Navigation Links */}
+          <nav
+            aria-label="Desktop navigation"
+            className="hidden md:flex items-center gap-4 sm:gap-6"
+          >
+            {navLinks.slice(1).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "font-medium hover-link",
-                  pathname === item.href ? "text-sesame-accent" : ""
+                  "nav-link text-base font-medium",
+                  pathname === item.href ? "active" : ""
                 )}
               >
                 {item.label}
@@ -80,11 +82,14 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* Right block: CTA button with ml-auto to push to far-right */}
+        {/* Demo CTA button - visible on all screen sizes */}
         <div className="ml-auto">
           <Link
             href="/demo"
-            className="rounded-full border border-sesame-primary px-4 py-1 hover:bg-white/10 transition-colors"
+            className={cn(
+              "demo-cta px-4 py-1.5 sm:px-5 sm:py-2",
+              pathname === "/demo" ? "active" : ""
+            )}
             aria-label="Try our demo"
           >
             Demo
@@ -94,59 +99,48 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="flex md:hidden items-center p-2 ml-4"
+          className={cn(
+            "hamburger hamburger--spin md:hidden ml-2 sm:ml-4",
+            isMenuOpen ? "is-active" : ""
+          )}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-expanded={isMenuOpen}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-controls="mobile-menu"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {isMenuOpen ? (
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            ) : (
-              <path
-                d="M4 6H20M4 12H20M4 18H20"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            )}
-          </svg>
+          <span className="hamburger-box">
+            <span className="hamburger-inner"></span>
+          </span>
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <nav className="flex flex-col p-4">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "py-2 font-medium transition-colors hover:text-sesame-accent",
-                  pathname === item.href ? "text-sesame-accent" : ""
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      {/* Mobile menu (separate nav element for mobile) */}
+      <div
+        id="mobile-menu"
+        className={cn(
+          "fixed md:hidden inset-0 top-16 bg-white z-40 transition-transform duration-300 ease-in-out",
+          isMenuOpen ? "transform-none" : "translate-y-full"
+        )}
+      >
+        <nav
+          aria-label="Mobile navigation"
+          className="flex flex-col p-4 sm:p-6 h-full"
+        >
+          {[...navLinks, { href: "/demo", label: "Demo" }].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "py-2 sm:py-3 text-lg sm:text-xl font-medium transition-colors hover:text-sesame-accent",
+                pathname === item.href ? "text-sesame-accent" : ""
+              )}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }

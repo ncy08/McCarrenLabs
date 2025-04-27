@@ -143,11 +143,55 @@
 
   /* Header/Nav styles */
   .nav-link {
-    @apply relative inline-block py-2 px-3 font-medium transition-colors duration-200 hover:text-sesame-accent;
+    @apply relative inline-block py-1 px-0 font-medium text-base transition-colors duration-200 hover:text-sesame-accent;
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-link.active {
+    @apply text-sesame-accent;
   }
 
   .nav-link.active::after {
-    @apply content-[''] absolute bottom-0 left-0 w-full h-0.5 bg-sesame-accent;
+    @apply content-[''] absolute -bottom-1 left-0 w-full h-[2px] bg-sesame-accent;
+    transform: scaleX(1);
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--sesame-accent);
+    bottom: -1px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Demo CTA button specific styles */
+  .demo-cta {
+    @apply rounded-full border border-sesame-primary text-sm font-medium transition-all duration-200;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .demo-cta:hover {
+    @apply bg-gray-50;
+  }
+
+  .demo-cta.active {
+    @apply bg-sesame-primary text-white;
+  }
+
+  .demo-cta.active:hover {
+    @apply bg-opacity-90;
   }
 
   /* 10-column grid layout that sesame.com uses */
@@ -158,6 +202,20 @@
   /* Focus states for a11y */
   .focus-visible {
     @apply outline-none ring-2 ring-sesame-accent ring-offset-2;
+  }
+
+  /* Left navigation specific styles */
+  .vertical-nav {
+    @apply flex flex-col gap-5 font-medium;
+  }
+
+  .vertical-nav .nav-item {
+    @apply text-gray-700 transition-colors duration-150 hover:text-sesame-accent;
+    position: relative;
+  }
+
+  .vertical-nav .nav-item.active {
+    @apply text-sesame-accent;
   }
 }
 
@@ -183,9 +241,83 @@
     @apply text-xl md:text-[20px] leading-relaxed;
   }
 
+  /* Hero section specific styling */
+  .hero-heading {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  .hero-paragraph {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+    color: #4b5563;
+  }
+
+  /* Goal number styling */
+  .goal-number {
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 200;
+    color: rgba(229, 231, 235, 0.8);
+    line-height: 0.8;
+    position: absolute;
+    z-index: 0;
+    letter-spacing: -0.02em;
+    transform: translateY(-60%) translateX(-10%);
+    user-select: none;
+    pointer-events: none;
+    top: 30%;
+    left: 0;
+  }
+
+  @media (min-width: 768px) {
+    .goal-number {
+      transform: translateY(-50%) translateX(0);
+      font-size: clamp(8rem, 16vw, 14rem);
+      color: rgba(229, 231, 235, 0.7);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .goal-number {
+      transform: translateY(-40%) translateX(0);
+      font-size: clamp(8rem, 18vw, 16rem);
+    }
+  }
+
   /* Custom serif style for headings */
   .font-serifify {
     font-variation-settings: "SERF" 33;
+  }
+
+  /* Mobile-specific adjustments */
+  @media (max-width: 430px) {
+    .text-h2 {
+      font-size: clamp(1.5rem, 7vw, 1.875rem);
+    }
+
+    .body-lg {
+      font-size: 1.05rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      letter-spacing: -0.02em;
+    }
+
+    /* More condensed spacing on mobile */
+    .py-28 {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    /* Full-bleed at smallest screens */
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
 

@@ -40,7 +40,7 @@ export default function TeamPage() {
       <MotionSection className="bg-white py-24 md:py-36">
         <GridBand>
           <div className="col-start-2 col-end-12 lg:col-end-10">
-            <h1 className="heading-2 font-semibold mb-6">Our Team</h1>
+            <h1 className="text-h2 font-semibold mb-6">Our Team</h1>
             <p className="body-lg mb-12 max-w-2xl">
               Sesame is built by an interdisciplinary team of researchers,
               engineers, designers, and operators with experience from leading

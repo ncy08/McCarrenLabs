@@ -11,6 +11,8 @@ interface GridBandProps {
  * GridBand - A reusable 12-column grid layout component
  * This component establishes consistent grid layout across the site
  * with proper spacing and responsiveness.
+ *
+ * Updated to match Site #2's exact grid specifications and spacing.
  */
 export const GridBand: React.FC<GridBandProps> = ({
   children,
@@ -21,10 +23,10 @@ export const GridBand: React.FC<GridBandProps> = ({
   return (
     <Component
       className={`relative w-full ${
-        fullWidth ? "" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        fullWidth ? "" : "max-w-screen-xl mx-auto px-5 sm:px-6 lg:px-8"
       }`}
     >
-      <div className={`grid grid-cols-12 gap-4 md:gap-6 ${className}`}>
+      <div className={`grid grid-cols-12 gap-4 md:gap-5 lg:gap-6 ${className}`}>
         {children}
       </div>
     </Component>
