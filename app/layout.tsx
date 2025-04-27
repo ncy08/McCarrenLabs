@@ -1,17 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "../styles/globals.css";
+import Footer from "@/components/layout/Footer";
+import { Metadata } from "next";
 import Script from "next/script";
 import Layout from "@/components/layout/Layout";
 
 const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
 // Load local Season Sans TRIAL font
 const season = localFont({
+  variable: "--font-season",
+  display: "swap",
+  fallback: ["Arial"],
+  adjustFontFallback: "Arial",
   src: [
     {
       path: "../public/fonts/season/SeasonSansTRIAL-Regular.woff2",
@@ -39,13 +45,12 @@ const season = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-season",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "McCarren Labs",
-  description: "McCarren Labs",
+  title: "McCarren Labs | Design-First Software Engineering",
+  description:
+    "We're a team of designers and engineers building beautiful, high-performance software for innovative companies.",
 };
 
 export default function RootLayout({
@@ -54,17 +59,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className} ${season.variable}`}>
+    <html lang="en" className={`${inter.variable} ${season.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="text-gray-700">
-        <div
-          id="scroll-wrapper"
-          className="overflow-y-scroll h-[100dvh] relative z-0"
-        >
-          <Layout>{children}</Layout>
-        </div>
+      <body className="bg-fog text-black antialiased">
+        <Layout>{children}</Layout>
 
         {/* Script for analytics */}
         <Script id="scroll-depth-tracking" strategy="afterInteractive">
